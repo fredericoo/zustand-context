@@ -1,6 +1,6 @@
 {
 	"name": "zustand-context",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "Create react contexts with zustand",
 	"scripts": {
 		"build": "tsup --dts --dts-resolve",
@@ -8,12 +8,20 @@
 		"check": "bunx @biomejs/biome check --apply ./src",
 		"release": "changeset publish"
 	},
-	"keywords": ["react", "reactjs", "zustand", "context", "hooks"],
+	"keywords": [
+		"react",
+		"reactjs",
+		"zustand",
+		"context",
+		"hooks"
+	],
 	"author": "fredericoo",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"license": "MIT",
-	"files": ["/dist"],
+	"files": [
+		"/dist"
+	],
 	"exports": {
 		".": {
 			"require": "./dist/index.js",
