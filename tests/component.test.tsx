@@ -3,7 +3,6 @@ import { cleanup, render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { create } from 'zustand';
 import { createZustandContext } from '../src';
-import { allCats, newCat } from './mocks';
 
 type Cat = string;
 
@@ -12,6 +11,9 @@ type CatStore = {
 	addCat: (cat: Cat) => void;
 	removeCat: (cat: Cat) => void;
 };
+
+const allCats = ['Salem', 'Mimo', 'Tapi'];
+const newCat = 'Millie';
 
 const [CatsProvider, useCatsStore] = createZustandContext((initialState: { cats: Cat[] }) =>
 	create<CatStore>((set) => ({
@@ -43,17 +45,14 @@ const CatsList = () => {
 	);
 };
 
-const renderApp = () =>
+afterEach(cleanup);
+
+test('should initialize state correctly', () => {
 	render(
 		<CatsProvider initialValue={{ cats: allCats }}>
 			<CatsList />
 		</CatsProvider>,
 	);
-
-afterEach(cleanup);
-
-test('should initialize state correctly', () => {
-	renderApp();
 
 	for (const cat of allCats) {
 		expect(screen.getByText(cat)).toBeTruthy();
@@ -63,7 +62,11 @@ test('should initialize state correctly', () => {
 test('should add new cat', async () => {
 	const user = userEvent.setup();
 
-	renderApp();
+	render(
+		<CatsProvider initialValue={{ cats: allCats }}>
+			<CatsList />
+		</CatsProvider>,
+	);
 
 	await user.click(screen.getByRole('button', { name: 'Add new cat' }));
 
@@ -77,7 +80,11 @@ test('should add new cat', async () => {
 test('should remove added cat', async () => {
 	const user = userEvent.setup();
 
-	renderApp();
+	render(
+		<CatsProvider initialValue={{ cats: allCats }}>
+			<CatsList />
+		</CatsProvider>,
+	);
 
 	await user.click(screen.getByRole('button', { name: 'Remove new cat' }));
 
