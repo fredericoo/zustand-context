@@ -4,8 +4,8 @@
 	"description": "Create react contexts with zustand",
 	"scripts": {
 		"build": "tsup --dts --dts-resolve",
-		"test": "bun test src tests",
-		"check": "bunx @biomejs/biome check --apply ./src ./tests",
+		"test": "bun test src",
+		"check": "bunx @biomejs/biome check --apply ./src",
 		"release": "changeset publish"
 	},
 	"keywords": [
